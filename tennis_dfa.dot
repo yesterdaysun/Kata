@@ -1,0 +1,47 @@
+digraph tennis_dfa {
+  rankdir = LR;
+  size = "8,5"
+
+  node [shape = doublecircle];
+
+  Player_1_win Player_2_win;
+
+  node [shape = circle];
+
+  s0_0 -> s15_0 [ label = "1" ];
+  s0_0 -> s0_15 [ label = "2" ];
+  s15_0 -> s30_0 [ label = "1" ];
+  s15_0 -> s15_15 [ label = "2" ];
+  s0_15 -> s15_15 [ label = "1" ];
+  s0_15 -> s0_30 [ label = "2" ];
+  s30_0 -> s40_0 [ label = "1" ];
+  s30_0 -> s30_15 [ label = "2" ];
+  s15_15 -> s30_15 [ label = "1" ];
+  s15_15 -> s15_30 [ label = "2" ];
+  s0_30 -> s15_30 [ label = "1" ];
+  s0_30 -> s0_40 [ label = "2" ];
+  s40_0 -> Player_1_win [ label = "1" ];
+  s40_0 -> s40_15 [ label = "2" ];
+  s30_15 -> s40_15 [ label = "1" ];
+  s30_15 -> s30_30 [ label = "2" ];
+  s15_30 -> s30_30 [ label = "1" ];
+  s15_30 -> s15_40 [ label = "2" ];
+  s0_40 -> s15_40 [ label = "1" ];
+  s0_40 -> Player_2_win [ label = "2" ];
+  s40_15 -> Player_1_win [ label = "1" ];
+  s40_15 -> s40_30 [ label = "2" ];
+  s30_30 -> s40_30 [ label = "1" ];
+  s30_30 -> s30_40 [ label = "2" ];
+  s15_40 -> s30_40 [ label = "1" ];
+  s15_40 -> Player_2_win [ label = "2" ];
+  s40_30 -> Player_1_win [ label = "1" ];
+  s40_30 -> deuce [ label = "2" ];
+  s30_40 -> deuce [ label = "1" ];
+  s30_40 -> Player_2_win [ label = "2" ];
+  deuce -> Player_1_advantage [ label = "1" ];
+  deuce -> Player_2_advantage [ label = "2" ];
+  Player_1_advantage -> Player_1_win [ label = "1" ];
+  Player_1_advantage -> deuce [ label = "2" ];
+  Player_2_advantage -> deuce [ label = "1" ];
+  Player_2_advantage -> Player_2_win [ label = "2" ];
+}

@@ -30,7 +30,7 @@ class DFA < Struct.new(:current_state, :accept_states, :rulebook)
   end
 end
 
-rules = [
+tennis_rules = [
   ['0 0','1', '15 0'],
   ['0 0','2', '0 15'],
 
@@ -76,9 +76,34 @@ rules = [
   ['Player 2 advantage', '2', 'Player 2 win!']
 ]
 
-rulebook = DFARuleBook.new(rules.map {|rule| FARule.new(*rule)})
-dfa = DFA.new('0 0', ['Player 1 win!', 'Player 2 win!'], rulebook)
+@@tennis_rulebook = DFARuleBook.new(tennis_rules.map {|rule| FARule.new(*rule)})
 
-dfa.read_string('12112211')
-p "#{dfa.accepting? ? 'finished, ' : ''}#{dfa.current_state}"
+# Test
+require "test/unit"
+class TestSimpleNumber < Test::Unit::TestCase
+  [
+    ['1', '15 0'],
+    ['2', '0 15'],
+    ['1111', 'Player 1 win!'],
+    ['121222', 'Player 2 win!']
+  ].each do |plays, expected_state|
+    test "tennis from start, and after #{plays}, result should be #{expected_state}" do
+      dfa = DFA.new('0 0', ['Player 1 win!', 'Player 2 win!'], @@tennis_rulebook)
+      assert_equal expected_state, dfa.tap{|dfa| dfa.read_string(plays)}.current_state
+    end
+  end
 
+  [
+    ['40 15', '1', 'Player 1 win!'],
+    ['30 30', '2', '30 40'],
+    ['30 30', '12', 'deuce'],
+    ['deuce', '12', 'deuce'],
+    ['deuce', '122', 'Player 2 advantage'],
+    ['deuce', '1222', 'Player 2 win!']
+  ].each do |start_state, plays, expected_state|
+    test "tennis from #{start_state}, and after #{plays}, result should be #{expected_state}" do
+      dfa = DFA.new(start_state, ['Player 1 win!', 'Player 2 win!'], @@tennis_rulebook)
+      assert_equal expected_state, dfa.tap{|dfa| dfa.read_string(plays)}.current_state
+    end
+  end
+end

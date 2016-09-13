@@ -66,12 +66,19 @@ For a total of 51.20
 And 51.20 is the price with the biggest discount.
 */
 public class TestHarryPotter {
+    private final BookStore bookStore = new BookStore();
+
     @Test
-    public void test_empty_book_purchase() {
-        BookStore bookStore = new BookStore();
+    public void empty_book_purchase_should_pay_0() {
+        assertPurchasePrice(BookPurchase.of(), "0");
+    }
 
-        BigDecimal price = bookStore.getPrice(BookPurchase.of());
+    @Test
+    public void buy_harry_potter_1_should_pay_8() {
+        assertPurchasePrice(BookPurchase.of(1), "8");
+    }
 
-        assertThat(price).isEqualTo("0");
+    private void assertPurchasePrice(BookPurchase bookPurchase, String expectedPrice) {
+        assertThat(bookStore.getPrice(bookPurchase)).isEqualTo(expectedPrice);
     }
 }

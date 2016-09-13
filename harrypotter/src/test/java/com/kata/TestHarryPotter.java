@@ -1,3 +1,11 @@
+package com.kata;
+
+import org.junit.Test;
+
+import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created by Eric on 16/9/13.
  */
@@ -58,4 +66,12 @@ For a total of 51.20
 And 51.20 is the price with the biggest discount.
 */
 public class TestHarryPotter {
+    @Test
+    public void test_empty_book_purchase() {
+        BookStore bookStore = new BookStore();
+
+        BigDecimal price = bookStore.getPrice(BookPurchase.of());
+
+        assertThat(price).isEqualTo("0");
+    }
 }

@@ -11,7 +11,10 @@ public class BookStore {
     private static List<BigDecimal> discounts = Arrays.asList(
             BigDecimal.ZERO,
             BigDecimal.ONE,
-            BigDecimal.valueOf(1 - 0.05)
+            new BigDecimal("0.95"),
+            new BigDecimal("0.90"),
+            new BigDecimal("0.80"),
+            new BigDecimal("0.75")
     );
 
     public BigDecimal getPrice(BookPurchase bookPurchase) {

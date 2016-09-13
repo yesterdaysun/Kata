@@ -82,8 +82,23 @@ public class TestHarryPotter {
     }
 
     @Test
-    public void buy_harry_potter_1_and_2_should_get_10_percent_discount() {
+    public void buy_harry_potter_1_and_2_should_get_5_percent_discount() {
         assertPurchasePrice(BookPurchase.of(1, 2), "15.20");
+    }
+
+    @Test
+    public void buy_3_harry_potter_should_get_10_percent_discount() {
+        assertPurchasePrice(BookPurchase.of(1, 2, 3), "21.60");
+    }
+
+    @Test
+    public void buy_4_harry_potter_should_get_20_percent_discount() {
+        assertPurchasePrice(BookPurchase.of(1, 2, 3, 4), "25.60");
+    }
+
+    @Test
+    public void buy_5_harry_potter_should_get_25_percent_discount() {
+        assertPurchasePrice(BookPurchase.of(1, 2, 3, 4, 5), "30.00");
     }
 
     private void assertPurchasePrice(BookPurchase bookPurchase, String expectedPrice) {

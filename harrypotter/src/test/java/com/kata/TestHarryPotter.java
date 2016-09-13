@@ -2,8 +2,6 @@ package com.kata;
 
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -74,8 +72,18 @@ public class TestHarryPotter {
     }
 
     @Test
-    public void buy_harry_potter_1_should_pay_8() {
+    public void buy_only_harry_potter_1_should_pay_8() {
         assertPurchasePrice(BookPurchase.of(1), "8");
+    }
+
+    @Test
+    public void buy_only_harry_potter_4_should_pay_8() {
+        assertPurchasePrice(BookPurchase.of(4), "8");
+    }
+
+    @Test
+    public void buy_harry_potter_1_and_2_should_get_10_percent_discount() {
+        assertPurchasePrice(BookPurchase.of(1, 2), "15.20");
     }
 
     private void assertPurchasePrice(BookPurchase bookPurchase, String expectedPrice) {

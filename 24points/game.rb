@@ -48,3 +48,6 @@ class Game
     nil
   end
 end
+
+
+p Game.new().resolve [2,2,23,25]
